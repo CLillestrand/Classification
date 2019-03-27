@@ -31,7 +31,7 @@ x_test = [x1_test; x2_test; x3_test];
 
 
 %% Do the shit
-for m = 1:1  % TODO: test for convergence
+for m = 1:100  % TODO: test for convergence
     MSE_grad = 0;
     for k = 1:train_size
         c = floor((k-1)/train_size * C) + 1;
@@ -40,10 +40,11 @@ for m = 1:1  % TODO: test for convergence
         
         x_k = [x_train(k,:)'; 1];
         z_k = W*x_k + w_0;
-        g_k = 1/(1);  % TODO: fix sigmoid
-        %MSE_grad = MSE_grad + ((g_k - t_k).*(g_k).*(1-g_k))*x_k';
+        g_k = sigmoid(z_k);
+        MSE_grad = MSE_grad + ((g_k - t_k).*(g_k).*(1-g_k))*x_k';
     end
     W = W - alpha*MSE_grad;
+    disp(norm(alpha*MSE_grad))
 end
 
 
