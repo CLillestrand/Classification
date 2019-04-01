@@ -10,7 +10,7 @@ test_size = test_size_c * C;
 W_0 = zeros(C, D);
 w_0 = zeros(C, 1);
 W = [W_0 w_0];
-M = 10000; % Number of iterations
+M = 1000; % Number of iterations
 alpha = 0.0075; % Step size
 MSEs = zeros(1, M);
 MSE_grads = zeros(1, M);
@@ -81,15 +81,12 @@ for k = 1:test_size
 end
 error_rate_test = 1 - trace(conf_matrix_test)/test_size;
 
-disp('Training error rate: ');
-disp(error_rate_train);
-disp('Training confusion matrix: ');
-disp(conf_matrix_train);
+disp(['Training error rate: ', error_rate_train]);
+disp(['Confusion matrix conf_matrix_train);
 
-disp('Testing error rate: ');
 disp(error_rate_test);
-disp('Testing confusion matrix: ');
 disp(conf_matrix_test);
+
 %% Plot the shit
 %figure(1);
 %plot(MSEs), grid;
