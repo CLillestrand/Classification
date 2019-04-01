@@ -2,6 +2,8 @@
 %% Init variables
 D = 4;  % Dimension of input vectors
 C = 3;  % Number of classes
+data_size_c = 50;
+data_size = data_size_c * C;
 train_size_c = 30;
 train_size = train_size_c * C;
 test_size_c = 20;
@@ -33,7 +35,7 @@ x3_test = x3(train_size_c+1:end,:);
 x_test = [x1_test; x2_test; x3_test];
 
 %% Training
-for m = 1:M  % TODO: test for convergence
+for m = 1:M  
     MSE_grad = 0;
     MSE = 0;
     for k = 1:train_size
@@ -101,5 +103,17 @@ plot(MSE_grads), grid;
 title('MSE gradient');
 
 run data_histograms;
+
+figure(4);
+hold on;
+grid on;
+for i = 1:(data_size_c)
+    plot(x1(i,1), x1(i,2), 'Color', 'm', 'Marker', 'o');
+    plot(x2(i,1), x2(i,2), 'Color', 'r', 'Marker', 'x');
+    plot(x3(i,1), x3(i,2), 'Color', 'b', 'Marker', '*');
+end
+xlabel('Sepal length');
+ylabel('Sepal width');
+title('Iris data');
 
 %test
