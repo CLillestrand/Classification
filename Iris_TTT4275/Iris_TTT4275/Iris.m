@@ -10,7 +10,7 @@ test_size = test_size_c * C;
 W_0 = zeros(C, D);
 w_0 = zeros(C, 1);
 W = [W_0 w_0];
-M = 10000; % Number of iterations
+M = 1000; % Number of iterations
 alpha = 0.0075; % Step size
 MSEs = zeros(1, M);
 MSE_grads = zeros(1, M);
@@ -90,9 +90,14 @@ disp('Testing error rate: ');
 disp(error_rate_test);
 disp('Testing confusion matrix: ');
 disp(conf_matrix_test);
-%% Plot the shit
-%figure(1);
-%plot(MSEs), grid;
 
-%figure(2);
-%plot(MSE_grads), grid;
+%% Plot results
+figure(1);
+plot(MSEs), grid;
+title('MSE');
+
+figure(2);
+plot(MSE_grads), grid;
+title('MSE gradient');
+
+run data_histograms;
