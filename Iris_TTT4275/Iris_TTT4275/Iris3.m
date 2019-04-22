@@ -1,9 +1,9 @@
 %Iris
 %% Init variables
-D = 4;  % Dimension of input vectors
+D = 3;  % Dimension of input vectors
 C = 3;  % Number of classes
 data_size_c = 50;
-data_size = data_s
+data_size = data_size_c * C;
 train_size_c = 30;
 train_size = train_size_c * C;
 test_size_c = 20;
@@ -20,8 +20,11 @@ MSE_grads = zeros(1, M);
 
 %% Load data
 x1 = load('class_1','-ascii');
+x1 = [x1(:,1) x1(:, 3:4)];
 x2 = load('class_2','-ascii');
+x2 = [x2(:,1) x2(:, 3:4)];
 x3 = load('class_3','-ascii');
+x3 = [x3(:,1) x3(:, 3:4)];
 x = [x1; x2; x3];
 
 x1_train = x1(1:train_size_c,:);
@@ -33,6 +36,7 @@ x1_test = x1(train_size_c+1:end,:);
 x2_test = x2(train_size_c+1:end,:);
 x3_test = x3(train_size_c+1:end,:);
 x_test = [x1_test; x2_test; x3_test];
+
 
 %% Training
 for m = 1:M  
@@ -53,6 +57,7 @@ for m = 1:M
     MSEs(m) = MSE;
     MSE_grads(m) = norm(MSE_grad);
 end
+
 
 %% Analysis
 conf_matrix_train = zeros(C);
@@ -93,20 +98,31 @@ disp(error_rate_test);
 disp('Testing confusion matrix: ');
 disp(conf_matrix_test);
 
+
 %% Plot results
 figure(1);
 plot(MSEs), grid;
-title('MSE');
+title('Minimum square error');
+xlabel('Iteration');
+ylabel('MSE magnitude');
 
 figure(2);
 plot(MSE_grads), grid;
 title('MSE gradient');
 
-run data_histograms;
+%run data_histograms;
 
 figure(4);
-for i = 1:(data_size)
-    
+hold on;
+grid on;
+for i = 1:(data_size_c)
+    plot(x1(i,1), x1(i,2), 'Color', 'm', 'Marker', 'o');
+    plot(x2(i,1), x2(i,2), 'Color', 'r', 'Marker', 'x');
+    plot(x3(i,1), x3(i,2), 'Color', 'b', 'Marker', '*');
 end
+xlabel('Sepal length');
+ylabel('Sepal width');
+title('Iris data');
+legend('I. setosa', 'I. versicolor', 'I. virginica');
 
 %test

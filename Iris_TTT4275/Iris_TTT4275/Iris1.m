@@ -1,6 +1,6 @@
 %Iris
 %% Init variables
-D = 4;  % Dimension of input vectors
+D = 1;  % Dimension of input vectors
 C = 3;  % Number of classes
 data_size_c = 50;
 data_size = data_size_c * C;
@@ -20,8 +20,11 @@ MSE_grads = zeros(1, M);
 
 %% Load data
 x1 = load('class_1','-ascii');
+x1 = x1(:, 3);
 x2 = load('class_2','-ascii');
+x2 = x2(:, 3);
 x3 = load('class_3','-ascii');
+x3 = x3(:, 3);
 x = [x1; x2; x3];
 
 x1_train = x1(1:train_size_c,:);
@@ -97,6 +100,7 @@ disp(conf_matrix_test);
 
 
 %% Plot results
+%{
 figure(1);
 plot(MSEs), grid;
 title('Minimum square error');
@@ -122,27 +126,4 @@ ylabel('Sepal width');
 title('Iris data');
 legend('I. setosa', 'I. versicolor', 'I. virginica');
 
-figure(5);
-l = 0;
-for j = 1:3
-    for k = 2:4
-        if k > j
-            l = l + 1;
-            subplot(2,3,l);
-            hold on;
-            grid on;
-            for i = 1:(data_size_c)
-                plot(x1(i,j), x1(i,k), 'Color', 'm', 'Marker', 'o');
-                plot(x2(i,j), x2(i,k), 'Color', 'r', 'Marker', 'x');
-                plot(x3(i,j), x3(i,k), 'Color', 'b', 'Marker', '*');
-            end
-            
-            xlabel(sprintf('Feature %d', j));
-            ylabel(sprintf('Feature %d', k));
-           
-            legend('I. setosa', 'I. versicolor', 'I. virginica');
-        end
-    end
-end
-sgtitle('Iris dataset for all feature combinations')
-
+%}

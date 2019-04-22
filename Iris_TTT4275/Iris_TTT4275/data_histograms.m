@@ -12,7 +12,8 @@ histogram(x1(:, 4), bins);
 ylim(y);
 xlim(x);
 grid on;
-title('Data class 1');
+title('Data I. setosa');
+legend('Sepal length', 'Sepal width', 'Petal length', 'Petal width');
 
 subplot(3,1,2);
 histogram(x2(:, 1), bins);
@@ -23,7 +24,8 @@ histogram(x2(:, 4), bins);
 ylim(y);
 xlim(x);
 grid on;
-title('Data class 2');
+title('Data I. versicolor');
+legend('Sepal length', 'Sepal width', 'Petal length', 'Petal width');
 
 subplot(3,1,3);
 histogram(x3(:, 1), bins);
@@ -34,4 +36,5 @@ histogram(x3(:, 4), bins);
 ylim(y);
 xlim(x);
 grid on;
-title('Data class 3');
+title('Data I. virginica');
+legend('Sepal length', 'Sepal width', 'Petal length', 'Petal width');
