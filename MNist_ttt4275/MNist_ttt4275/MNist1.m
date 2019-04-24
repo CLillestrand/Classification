@@ -1,14 +1,4 @@
-% x = zeros(28, 28);
-% x(:) = trainv(6,:);
-% display_image(x);
-% 
-% d = 0;
-% nearest = 0;
-% 
-% for i = 1:1000 
-%     testv()
-%     
-% end
+C = 10;
 
 chunk_size = 1000;
 num_chunks = num_test/chunk_size;
@@ -26,17 +16,10 @@ for i = 1:num_chunks
     end
 end
 
-winners = [];
+nn_labels = zeros(num_test, 1);
 
 for i = 1:num_test
     [nn_dist, nn_index] = min(nn_distances(i,:));
     nn_label = trainlab(nn_indices(i, nn_index));
-    winners = [winners; nn_label];
-end
-
-inc = 0;
-for i = 1:num_test
-    if winners(i) == testlab(i)
-        inc = inc + 1;
-    end
+    nn_labels(i) = nn_label;
 end
