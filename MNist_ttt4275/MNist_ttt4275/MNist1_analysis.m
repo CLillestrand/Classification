@@ -9,7 +9,13 @@ disp(conf_matrix);
 disp('Error rate: ');
 disp(eer);
 
-% x = zeros(28, 28);
-% x(:) = trainv(6,:);
-% display_image(x);
+x = zeros(28, 28);
+x(:) = testv(17,:); % classified as 4, was 9
+display_image(x);
+
+x(:) = testv(44,:); % classified as 1, was 2
+display_image(x);
+
+x(:) = testv(74,:); % classified as 7, was 9
+display_image(x);
     
