@@ -1,11 +1,11 @@
+%% Initialisation:
 C = 10;
-
 chunk_size = 1000;
 num_chunks = num_test/chunk_size;
-
 nn_distances = zeros(num_test, num_chunks);
 nn_indices = zeros(num_test, num_chunks);
 
+%% Find nearest neighbour for each test sample in each chunk:
 for i = 1:num_chunks
     W = trainv((i-1)*chunk_size+1:i*chunk_size,:);
     Z = dist(W,testv');
@@ -16,8 +16,8 @@ for i = 1:num_chunks
     end
 end
 
+%% Find global nearest neighbour for each test sample:
 nn_labels = zeros(num_test, 1);
-
 for i = 1:num_test
     [nn_dist, nn_index] = min(nn_distances(i,:));
     nn_label = trainlab(nn_indices(i, nn_index));
