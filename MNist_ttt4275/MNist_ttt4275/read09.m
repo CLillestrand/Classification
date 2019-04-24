@@ -1,4 +1,5 @@
-% This program will take some time ( approx 15 minutes?) but should be used only once. Use the Matlab file data_all after this
+% This program will take some time ( approx 15 minutes?) but should be used only once. 
+% Use the Matlab file data_all after this
 fid =  fopen('train_images.bin','r');
 magic_num = fread(fid,1,'int32','ieee-be');
 num_train=fread(fid,1,'int32','ieee-be');
@@ -6,7 +7,7 @@ row_size=fread(fid,1,'int32','ieee-be');
 col_size=fread(fid,1,'int32','ieee-be');
 
 vec_size = row_size*col_size;
- trainv=zeros(num_train,vec_size);
+trainv=zeros(num_train,vec_size);
 
 for k = 1:num_train
 	for n = 1:vec_size
