@@ -31,12 +31,23 @@ for i = 0:(num_classes-1)
     C((i*M+1):((i+1)*M),:) = Ci;
 end
 
-%% Find nearest neighbour for each test sample:
+%% Find K nearest neighbour for each test sample:
+
 nn_labels = zeros(num_test, 1);
+K = 7;
 Z = dist(C,testv');
-for i = 1:num_test
-    [nn_dist, nn_index] = min(Z(:,i));
-    nn_labels(i) = floor((nn_index-1)/M);
+
+for i = 1:10
+    [knn_distances, knn_indices] = mink(Z(:,i),K);
+    knn_labels = zeros(K,1);
+    for j = 1:K
+        knn_labels(j) = floor((knn_indices(j)-1)/M);
+    end
+   
+    %sortrows(A, [2 3]) sorts first in col 2 then 3
+    % fix tie with fucked up code
+    
+    nn_labels(i) = floor((knn_indices(j)-1)/M);
 end
 
 toc
