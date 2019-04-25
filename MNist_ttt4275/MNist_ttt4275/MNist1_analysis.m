@@ -1,4 +1,4 @@
-conf_matrix = zeros(C);
+conf_matrix = zeros(num_classes);
 for i = 1:num_test
     conf_matrix(nn_labels(i)+1, testlab(i)+1) = conf_matrix(nn_labels(i)+1, testlab(i)+1) + 1;
 end

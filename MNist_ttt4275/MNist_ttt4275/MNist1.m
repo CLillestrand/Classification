@@ -1,5 +1,6 @@
 %% Initialisation:
-C = 10;
+tic
+num_classes = 10;
 chunk_size = 1000;
 num_chunks = num_test/chunk_size;
 nn_distances = zeros(num_test, num_chunks);
@@ -14,6 +15,7 @@ for i = 1:num_chunks
         nn_distances(j, i) = nn_dist;
         nn_indices(j, i) = (i-1)*chunk_size+nn_index;
     end
+    fprintf('Chunk %d done\n',i);
 end
 
 %% Find global nearest neighbour for each test sample:
@@ -23,3 +25,5 @@ for i = 1:num_test
     nn_label = trainlab(nn_indices(i, nn_index));
     nn_labels(i) = nn_label;
 end
+
+toc
