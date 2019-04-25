@@ -38,17 +38,22 @@ Z = dist(C,testv');
 
 for i = 1:num_test
     [knn_distances, knn_indices] = mink(Z(:,i),K);
+    knn_labels = zeros(K,1);
     knn_data = zeros(num_classes, 2);
     for j = 1:K
         label = floor((knn_indices(j)-1)/M);
-        knn_data(label+1, 1) = knn_data(label+1, 1) + 1; % Add occurence of number in KKNs
-        if knn_data(label+1, 2) == 0 || knn_data(label+1,2) > knn_distances(j)
-            knn_data(label+1,2) = knn_distances(j); % Update shortest distance
-        end
+        %knn_labels(j) = label;
+        knn_data(label, 1) = knn_data(label, 1) + 1; % Add occurence of number in KKNs
+        if knn_data(label, 2) == 1 || knn_data(label,2) > knn_distances(j)
+            kn
     end
+   
     
-    [knn_data, index] = sortrows(knn_data, [1 2], {'ascend' 'descend'});
-    nn_labels(i) = index(end)-1; % Grab number with most neighbours and lowest distance
+   
+    %sortrows(A, [2 3]) sorts first in col 2 then 3
+    % fix tie with fucked up code
+    
+    nn_labels(i) = mode(knn_labels);
 end
 
 toc
