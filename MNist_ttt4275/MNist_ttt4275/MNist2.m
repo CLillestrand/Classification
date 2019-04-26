@@ -32,11 +32,9 @@ for i = 0:(num_classes-1)
 end
 
 %% Find nearest neighbour for each test sample:
-nn_labels = zeros(num_test, 1);
-Z = dist(C,testv');
-for i = 1:num_test
-    [nn_dist, nn_index] = min(Z(:,i));
-    nn_labels(i) = floor((nn_index-1)/M);
-end
+K = 1;
+cluster_labels = repelem([0 1 2 3 4 5 6 7 8 9]', M);
+Mdl = fitcknn(C,cluster_labels,'NumNeighbors',K);
+nn_labels = predict(Mdl, testv);
 
 toc
